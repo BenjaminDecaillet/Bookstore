@@ -1,27 +1,44 @@
 package hel.haagahelia.bookstore.Bookstore.domain;
 
-import java.math.BigDecimal;
+import java.util.UUID;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
+@Entity
 public class Book {
 
-	@NotNull
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private long id;
+	
 	private String isbn;
 	
-	@NotNull
 	private String title;
 	
-	@NotNull
 	private String author;
 	
-	@NotNull
 	private int year;
 	
-	@NotNull
-	private BigDecimal price;
+	private double price;
 
+	public Book() {}
+	
+	public Book(String isbn, String title, String author, int year, double price) {
+		super();
+		this.isbn=isbn;
+		this.title = title;
+		this.author = author;
+		this.year = year;
+		this.price = price;
+	}
+
+	public long getId() {
+		return id;
+	}
+	
 	public String getIsbn() {
 		return isbn;
 	}
@@ -54,11 +71,11 @@ public class Book {
 		this.year = year;
 	}
 
-	public BigDecimal getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
-	public void setPrice(BigDecimal price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 	
