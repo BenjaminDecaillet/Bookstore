@@ -3,12 +3,13 @@
 <head>
     <title>Add Book</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" /> 
+   	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{../css/bootstrap.min.css}" /> 
 </head>
 <body>
 	<h1>Edit Book</h1>
-	<div>
+	<div class="container">
 		<form th:object="${book}" th:action="@{../saveBook}" action="#" method="post">
+		
 			<input type="hidden" id="id" th:field="*{id}"/>
 			<div class="form-group">
 				<label for="author">Author</label>
