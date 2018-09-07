@@ -2,6 +2,7 @@ package hel.haagahelia.bookstore.Bookstore.web;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,12 @@ import hel.haagahelia.bookstore.Bookstore.domain.BookRepository;
 
 @Controller
 public class BookController {
+	
+	static String createISBN(){
+		int x = (int)(Math.random()*((100000000-1000000)+1))+1000000;
+		int y = (int)(Math.random()*((100-10)+1))+10;
+		return x + "-"+y;
+	}
 	
 	@Autowired 
 	private BookRepository bookrepository;
@@ -39,8 +46,16 @@ public class BookController {
 	return "addbook";
 	}
 	
+	@RequestMapping(value = "/editbook/{id}", method = RequestMethod.GET)
+	public String editbook(@PathVariable("id") Long bookId, Model model) {
+		model.addAttribute("book", bookrepository.findById(bookId));
+	return "editbook";
+	}
+	
 	@RequestMapping(value = "/saveBook", method = RequestMethod.POST)
 	public String savebook(Book book) {
+		if(book.getIsbn() == null)
+			book.setIsbn(createISBN());
 		bookrepository.save(book);
 	return "redirect:booklist";
 	}

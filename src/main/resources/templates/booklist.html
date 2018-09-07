@@ -4,30 +4,22 @@
 	<head>
 		<title>Booklist</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<style>
-		table {
-	    	border-collapse: collapse;
-	    	width:90%;
-		}
-	
-		table, th, td {
-		    border: 1px solid black;
-		}
-		</style>
-	</head>
+    	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+   	</head>
 	<body>
 	<h1>Books</h1>
 		<table class="table table-striped">
-			<tr><th>Author</th><th>title</th><th>ISBN</th><th>Year</th><th>Price</th><th></th></tr>
+			<tr><th>Author</th><th>title</th><th>ISBN</th><th>Year</th><th>Price</th><th></th><th></th>	</tr>
 			<tr th:each="book : ${books}">
 				<td th:text="${book.author}">author...</td>
 				<td th:text="${book.title}">title ...</td>
 				<td th:text="${book.isbn}">ISBN ...</td>
 				<td th:text="${book.year}">Year ...</td>
 				<td th:text="${book.price}">Price ...</td>
-				<td><a th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td>
+				<td><a class="btn btn-danger" th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td>
+				<td><a  class="btn btn-warning"th:href="@{/editbook/{id}(id=${book.id})}">Edit</a></td>
 			</tr>
 		</table>
-		<a href="/addbook" class="btn btn-primary">Add Student</a>
+		<a href="/addbook" class="btn btn-success">Add Book</a>
 	</body>
 </html>
