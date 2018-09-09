@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import hel.haagahelia.bookstore.Bookstore.domain.Book;
 import hel.haagahelia.bookstore.Bookstore.domain.BookRepository;
+import hel.haagahelia.bookstore.Bookstore.domain.CategoryRepository;
 
 
 @Controller
@@ -28,6 +29,8 @@ public class BookController {
 	
 	@Autowired 
 	private BookRepository bookrepository;
+	@Autowired
+	private CategoryRepository categoryrepository;
 	
 	@RequestMapping(value={"/index"})
 	public String messages(Model model) {
@@ -43,12 +46,14 @@ public class BookController {
 	@RequestMapping(value = "/addbook")
 	public String addbook(Model model) {
 		model.addAttribute("book", new Book());
+		model.addAttribute("categories", categoryrepository.findAll());
 	return "addbook";
 	}
 	
 	@RequestMapping(value = "/editbook/{id}", method = RequestMethod.GET)
 	public String editbook(@PathVariable("id") Long bookId, Model model) {
 		model.addAttribute("book", bookrepository.findById(bookId));
+		model.addAttribute("categories", categoryrepository.findAll());
 	return "editbook";
 	}
 	
