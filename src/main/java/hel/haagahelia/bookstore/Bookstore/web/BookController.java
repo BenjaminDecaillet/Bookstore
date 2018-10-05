@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import hel.haagahelia.bookstore.Bookstore.domain.Book;
@@ -69,5 +70,19 @@ public class BookController {
 	public String deleteStudent(@PathVariable("id") Long bookId, Model model) {
 		bookrepository.deleteById(bookId);
 	return "redirect:../booklist";
+	}
+	
+	/*
+	 * REST METHODS
+	 */
+	
+	@RequestMapping(value = "/books", method = RequestMethod.GET)
+	public @ResponseBody List<Book> bookList() {
+	return (List<Book>) bookrepository.findAll();
+	}
+	
+	@RequestMapping(value = "/book/{id}", method = RequestMethod.GET)
+	public @ResponseBody Book findBook(@PathVariable("id") Long bookId) {
+	return bookrepository.findById(bookId).get();
 	}
 }
