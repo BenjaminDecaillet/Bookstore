@@ -3,6 +3,8 @@ package hel.haagahelia.bookstore.Bookstore;
 import java.util.List;
 import java.util.UUID;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -16,7 +18,7 @@ import hel.haagahelia.bookstore.Bookstore.domain.CategoryRepository;
 
 @SpringBootApplication
 public class BookstoreApplication {
-	
+	private static final Logger log = LoggerFactory.getLogger(BookstoreApplication.class);
 	@Autowired 
 	private BookRepository bookrepository;
 	@Autowired

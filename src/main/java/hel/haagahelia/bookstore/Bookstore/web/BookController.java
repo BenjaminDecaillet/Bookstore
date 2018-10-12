@@ -23,7 +23,7 @@ import hel.haagahelia.bookstore.Bookstore.domain.BookRepository;
 import hel.haagahelia.bookstore.Bookstore.domain.CategoryRepository;
 
 
-@RestController
+@Controller
 public class BookController {
 
 	static String createISBN(){
@@ -36,13 +36,16 @@ public class BookController {
 	private BookRepository bookrepository;
 	@Autowired
 	private CategoryRepository categoryrepository;
-
-
-	@RequestMapping(value={"/index"})
-	public String messages(Model model) {
-		return "redirect:index";
-	}
-
+	
+	@RequestMapping(value="/")
+    public String index() {	
+        return "login";
+    }
+    @RequestMapping(value="/login")
+    public String login() {	
+        return "login";
+    }
+	
 	@RequestMapping(value = "/booklist")
 	public String booklist(Model model) {
 		model.addAttribute("books", (List<Book>) bookrepository.findAll());
