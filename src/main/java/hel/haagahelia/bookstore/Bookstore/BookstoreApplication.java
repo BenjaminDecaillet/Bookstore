@@ -1,8 +1,5 @@
 package hel.haagahelia.bookstore.Bookstore;
 
-import java.util.List;
-import java.util.UUID;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +12,8 @@ import hel.haagahelia.bookstore.Bookstore.domain.Book;
 import hel.haagahelia.bookstore.Bookstore.domain.BookRepository;
 import hel.haagahelia.bookstore.Bookstore.domain.Category;
 import hel.haagahelia.bookstore.Bookstore.domain.CategoryRepository;
+import hel.haagahelia.bookstore.Bookstore.domain.User;
+import hel.haagahelia.bookstore.Bookstore.domain.UserRepository;
 
 @SpringBootApplication
 public class BookstoreApplication {
@@ -23,7 +22,9 @@ public class BookstoreApplication {
 	private BookRepository bookrepository;
 	@Autowired
 	private CategoryRepository categoryrepository;
-
+	@Autowired 
+	private UserRepository userrepository;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(BookstoreApplication.class, args);
 	}
@@ -34,10 +35,7 @@ public class BookstoreApplication {
 		return x + "-"+y;
 	}
 	
-	public void dosomething(){
-		List<Book> books = (List<Book>) bookrepository.findAll();
-		List<Category> categories = (List<Category>) categoryrepository.findAll();
-	}
+	
 	
 	@Bean
 	CommandLineRunner runner(){
@@ -66,6 +64,13 @@ public class BookstoreApplication {
 			bookrepository.save(book2);
 			bookrepository.save(book3);
 			bookrepository.save(book4);
+			
+			// username: user password: user
+			userrepository.save(new User("user",
+					"$2a$04$1.YhMIgNX/8TkCKGFUONWO1waedKhQ5KrnB30fl0Q01QKqmzLf.Zi","user@mail.com","USER"));
+			// username: admin password: admin
+			userrepository.save(new User("admin",
+					"$2a$04$KNLUwOWHVQZVpXyMBNc7JOzbLiBjb9Tk9bP7KNcPI12ICuvzXQQKG","admin@mail.com","ADMIN"));
 		};
 	}
 }
